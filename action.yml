@@ -1,6 +1,6 @@
-name: 'ftp-action'
+name: 'lftp-custom-action'
 author: 'Sebastian Popp <ftp-action@sebastianpopp.com>'
-description: 'Automate copying your files via FTP using this GitHub action.'
+description: 'Automate copying your files via FTP using this GitHub action. This command is fork of sebastianpopp/ftp-action'
 inputs:
   host:
     description: 'FTP host'
@@ -11,6 +11,10 @@ inputs:
   password:
     description: 'FTP password'
     required: true
+  command:
+    description: 'Specify LFTP command'
+    required: false
+    default: 'mirror'
   forceSsl:
     description: 'Force SSL encryption'
     required: false
@@ -26,7 +30,7 @@ inputs:
   options:
     description: 'Additional mirror command options'
     required: false
-    default: ''
+    default: '--reverse --continue --dereference'
 runs:
   using: 'docker'
   image: 'Dockerfile'
